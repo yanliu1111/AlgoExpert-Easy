@@ -10,25 +10,25 @@ class BST {
   }
 }
 
-export function findClosestValueInBst(tree: BST, target: number) {
-  let closest = tree.value;
-  let currentNode: BST | null = tree;
-
-  while (currentNode !== null) {
-    if (Math.abs(target - closest) > Math.abs(target - currentNode.value)) {
-      closest = currentNode.value;
-    }
-
-    if (target > currentNode.value) {
-      currentNode = currentNode.right;
-    } else if (target < currentNode.value) {
-      currentNode = currentNode.left;
+export function findClosestValueInBst(tree: BST, target: number): number {
+  // (tree: BST, target: number) :number means that the function returns a number
+  if (tree.value === target) return tree.value;
+  else {
+    if (target < tree.value) {
+      if (tree.left !== null) {
+        let leftValue = findClosestValueInBst(tree.left!, target); // tree.left! means that tree.left is not null
+        if (tree.value - target < target - leftValue) return tree.value;
+        return leftValue;
+      }
     } else {
-      break;
+      if (tree.right! == null) {
+        let rightValue = findClosestValueInBst(tree.right!, target);
+        if (target - tree.value < rightValue - target) return tree.value;
+        return rightValue;
+      }
     }
+    return tree.value;
   }
-
-  return closest;
 }
 
 console.log(
