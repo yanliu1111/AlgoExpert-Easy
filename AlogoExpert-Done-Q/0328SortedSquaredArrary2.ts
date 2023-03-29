@@ -1,5 +1,5 @@
-//remove export
-function sortedSquaredArray(array: number[]) {
+// Sorted Squared Array
+export function sortedSquaredArray(array: number[]) {
   let start = 0;
   let end = array.length - 1;
   let squareNums = [];
@@ -8,16 +8,15 @@ function sortedSquaredArray(array: number[]) {
     if (Math.abs(array[start]) > Math.abs(array[end])) {
       const square = Math.pow(array[start], 2);
       squareNums.unshift(square);
+      //unshift() method adds one or more elements to the beginning of an array and returns the new length of the array
+      //?can I do step by step debugging in VSCode?
       start++;
-      console.log("!!", squareNums);
     } else {
       const square = Math.pow(array[end], 2);
       squareNums.unshift(square);
       end--;
-      console.log("??", squareNums);
     }
     numbersToBeSquaredCount--;
   }
   return squareNums;
 }
-console.log(sortedSquaredArray([-1, 0, 2]));

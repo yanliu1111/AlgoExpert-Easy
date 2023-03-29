@@ -1,13 +1,25 @@
 "use strict";
-function twoNumberSum(numbers, targetSum) {
-    const targetSumPairs = [];
-    for (let number of numbers) {
-        console.log(number);
-        if (targetSumPairs.includes(number)) {
-            return [number, targetSum - number];
+//remove export
+function sortedSquaredArray(array) {
+    let start = 0;
+    let end = array.length - 1;
+    let squareNums = [];
+    let numbersToBeSquaredCount = array.length;
+    while (numbersToBeSquaredCount > 0) {
+        if (Math.abs(array[start]) > Math.abs(array[end])) {
+            const square = Math.pow(array[start], 2);
+            squareNums.unshift(square);
+            start++;
+            console.log("!!", squareNums);
         }
-        targetSumPairs.push(targetSum - number);
+        else {
+            const square = Math.pow(array[end], 2);
+            squareNums.unshift(square);
+            end--;
+            console.log("??", squareNums);
+        }
+        numbersToBeSquaredCount--;
     }
-    return [];
+    return squareNums;
 }
-console.log(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10));
+console.log(sortedSquaredArray([-1, 0, 2]));
