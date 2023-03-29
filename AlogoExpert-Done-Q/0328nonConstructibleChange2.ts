@@ -5,3 +5,5 @@ export function nonConstructibleChange(coins: number[]) {
     else currentTotal += coin;
   return currentTotal;
 }
+
+// ?? I dont understand let coin of coins.sort((a, b) => a - b)
