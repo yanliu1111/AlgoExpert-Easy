@@ -6,7 +6,7 @@ export function sortedSquaredArray(array: number[]) {
   let numbersToBeSquaredCount = array.length;
   while (numbersToBeSquaredCount > 0) {
     if (Math.abs(array[start]) > Math.abs(array[end])) {
-      const square = Math.pow(array[start], 2);
+      const square: number = Math.pow(array[start], 2);
       squareNums.unshift(square);
       //unshift() method adds one or more elements to the beginning of an array and returns the new length of the array
       //?? can I do step by step debugging in VSCode?

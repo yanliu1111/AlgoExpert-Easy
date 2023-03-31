@@ -1,4 +1,4 @@
-//remove export
+// remove export
 // function sortedSquaredArray(array: number[]) {
 //   let start = 0;
 //   let end = array.length - 1;
@@ -22,14 +22,22 @@
 // }
 // console.log(sortedSquaredArray([-1, 0, 2]));
 
-function nonConstructibleChange(coins: number[]) {
-  coins.sort((a: number, b: number) => a - b);
-  let currentMax = 0;
-  for (const coin of coins) {
-    if (coin > currentMax + 1) return currentMax + 1;
-    currentMax += coin;
-  }
+// function nonConstructibleChange(coins: number[]) {
+//   coins.sort((a: number, b: number) => a - b);
+//   let currentMax = 0;
+//   for (const coin of coins) {
+//     if (coin > currentMax + 1) return currentMax + 1;
+//     currentMax += coin;
+//   }
 
-  return currentMax + 1;
-}
-console.log(nonConstructibleChange([1, 2, 4, 5]));
+//   return currentMax + 1;
+// }
+// console.log(nonConstructibleChange([1, 2, 4, 5]));
+
+let nums = [10, -3, 5, -1, 0, 2, 3];
+let sorter = (a: number, b: number) => {
+  console.log(a, b, a - b);
+  return a - b;
+};
+let x = nums.sort(sorter);
+console.log(x);
