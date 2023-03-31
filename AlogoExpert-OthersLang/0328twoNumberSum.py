@@ -38,3 +38,4 @@ def twoNumberSum(array, targetSum):
                 right -= 1
     return []
 #summary, the space complexity here, 3rd as good as 1st with the double for loop, better than 2nd with hash table. Time complexity is better than the double fo loop but worse than the one with hash table.
+# In the interview, about trade off between time and space, maybe you value space more than time, you use last solution. Otherwise, you use the second solution with hash table, if you value time more than space.
