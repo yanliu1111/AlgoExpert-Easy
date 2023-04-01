@@ -33,11 +33,23 @@
 //   return currentMax + 1;
 // }
 // console.log(nonConstructibleChange([1, 2, 4, 5]));
-
-let nums = [10, -3, 5, -1, 0, 2, 3];
-let sorter = (a: number, b: number) => {
-  console.log(a, b, a - b);
-  return a - b;
-};
-let x = nums.sort(sorter);
-console.log(x);
+function sortedSquaredArray(array) {
+  let start = 0;
+  let end = array.length - 1;
+  let squareNums = [];
+  let numbersToBeSquaredCount = array.length;
+  while (numbersToBeSquaredCount > 0) {
+    if (Math.abs(array[start]) > Math.abs(array[end])) {
+      const square = Math.pow(array[start], 2);
+      squareNums.unshift(square);
+      start++;
+    } else {
+      const square = Math.pow(array[end], 2);
+      squareNums.unshift(square);
+      end--;
+    }
+    numbersToBeSquaredCount--;
+  }
+  return squareNums;
+}
+console.log(sortedSquaredArray([-1, 0, 2, 4, 5]));
