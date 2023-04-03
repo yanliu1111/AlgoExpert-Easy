@@ -1,5 +1,6 @@
 # O(n) time | O(k) space
 #n is number of comepition, k is the number of teams
+HOME_TEAM_WON = 1
 def tournamentWinner(competitions, results):
     currentBestTeam = ""
     scores = {currentBestTeam: 0}
