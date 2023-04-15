@@ -14,9 +14,14 @@ export class Node {
   }
   depthFirstSearch(array: string[]) {
     array.push(this.name);
-    for (const child of this.children) {
-      child.depthFirstSearch(array);
-    }
+    // for (const child of this.children) {
+    //   child.depthFirstSearch(array);
+    // }
+    this.children.forEach((childNode: Node) =>
+      childNode.depthFirstSearch(array)
+    );
+    //Node is data type, childNode is a variable
     return array;
   }
 }
+//time complexity: O(v + e) v is the number of vertices, e is the number of edges
