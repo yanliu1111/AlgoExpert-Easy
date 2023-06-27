@@ -24,7 +24,7 @@ const findSmallestDifferent = (array) => {
     const subset = validSubsets[i];
     const remaining = array.filter((num) => !subset.includes(num));
     const diff = Math.abs(
-      subset.reduce((a, b) => a + b) - remaining.reduce((a, b) => a + b)
+      subset.reduce((a, b) => a + b, 0) - remaining.reduce((a, b) => a + b, 0)
     );
     if (diff <= smallestDifferent) {
       validGroups.push({
