@@ -1,14 +1,12 @@
 const findSmallestDifferent = (array) => {
   const n = array.length;
-  const subsetSize = Math.floor(n / 2); // the size of subset
-  let smallestDifferent = Infinity; // Infinity is a numeric value that represents positive infinity.
+  const subsetSize = Math.floor(n / 2);
+  let smallestDifferent = Infinity;
   let validSubsets = [];
 
-  // generate all possible subsets except empty set and one element set
-  // when I set array in the function, subsetSize, start, subset, it will be array = [1, 2, 3, 4, 5], size = 2, start = 0, subset = []
   const generateCombinations = (arr, size, start, subset) => {
     if (subset.length === size) {
-      validSubsets.push([...subset]); // Store a copy of the current subset in validSubsets
+      validSubsets.push([...subset]);
       return;
     }
 
@@ -21,9 +19,7 @@ const findSmallestDifferent = (array) => {
 
   generateCombinations(array, subsetSize, 0, []);
 
-  // itertate through validSubsets, and find the smallest difference
-  let validGroup1 = [];
-  let validGroup2 = [];
+  let validGroups = [];
   for (let i = 0; i < validSubsets.length; i++) {
     const subset = validSubsets[i];
     const remaining = array.filter((num) => !subset.includes(num));
@@ -31,16 +27,15 @@ const findSmallestDifferent = (array) => {
       subset.reduce((a, b) => a + b) - remaining.reduce((a, b) => a + b)
     );
     if (diff <= smallestDifferent) {
-      validGroup1.push([...subset]);
-      validGroup2.push([...remaining]);
+      validGroups.push({
+        group1: [...subset],
+        group2: [...remaining],
+        difference: diff,
+      });
       smallestDifferent = diff;
     }
   }
-  return {
-    group1: validGroup1,
-    group2: validGroup2,
-    difference: smallestDifferent,
-  };
+  return validGroups;
 };
 
 console.log(findSmallestDifferent([1, 2, 3, 4, 5]));
