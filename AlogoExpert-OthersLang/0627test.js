@@ -1,3 +1,4 @@
+// generate all groups and differences
 const findSmallestDifferent = (array) => {
   const n = array.length;
   const subsetSize = Math.floor(n / 2);
