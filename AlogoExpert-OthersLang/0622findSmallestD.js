@@ -1,6 +1,3 @@
-//array = [1, 2, 3, 4, 5] => the results should be group1 [1, 2, 5] group2 [3, 4] difference is 1
-//because 1 is the smallest difference,there are two set of groups that have the same difference, so we need to return both of them
-
 const findSmallestDifferent = (array) => {
   const n = array.length;
   const subsetSize = Math.floor(n / 2); // the size of subset
@@ -11,7 +8,7 @@ const findSmallestDifferent = (array) => {
   // when I set array in the function, subsetSize, start, subset, it will be array = [1, 2, 3, 4, 5], size = 2, start = 0, subset = []
   const generateCombinations = (arr, size, start, subset) => {
     if (subset.length === size) {
-      validSubsets.push([...subset]); // Store a copy of the current subset in validSubsets
+      validSubsets.push([...subset]); // spread operator for storing a copy of the current subset in validSubsets
       return;
     }
 
@@ -72,57 +69,55 @@ console.log(findSmallestDifferent([-2, -1, 1, 2, 3]));
 console.log(findSmallestDifferent([1, 2, 4, 8]));
 //{ group1: [ 1, 8 ], group2: [ 2, 4 ], difference: 3 }
 
-//Best Solution Jun 26, 2023
-function findGroups(array) {
-  const sortedArray = array.sort((a, b) => a - b); // Sort the array in ascending order
-  const result = [];
-  let smallestDifference = Number.MAX_SAFE_INTEGER;
+//Better solution - 06/27
+const findSmallestDifferent2 = (array) => {
+  const n = array.length;
+  const subsetSize = Math.floor(n / 2);
+  let smallestDifferent = Infinity;
+  let smallestDifferentGroups = [];
 
-  const generateCombinations = (currentIndex, group1, group2) => {
-    if (currentIndex === sortedArray.length) {
-      const difference = Math.abs(sum(group1) - sum(group2));
-      if (difference <= smallestDifference) {
-        if (difference < smallestDifference) {
-          result.length = 0; // Reset the result array if a smaller difference is found
-          smallestDifference = difference;
-        }
-        result.push({
-          group1: group1.slice(), // Store a copy of the current group1 in the result array
-          group2: group2.slice(),
-          difference,
+  array.sort((a, b) => a - b);
+
+  const generateCombinations = (arr, size, start, subset) => {
+    if (subset.length === size) {
+      const remaining = array.filter((num) => !subset.includes(num));
+      const diff = Math.abs(
+        subset.reduce((a, b) => a + b, 0) - remaining.reduce((a, b) => a + b, 0)
+      );
+
+      if (diff < smallestDifferent) {
+        smallestDifferent = diff;
+        smallestDifferentGroups = [
+          {
+            group1: [...subset],
+            group2: [...remaining],
+            difference: diff,
+          },
+        ];
+      } else if (diff === smallestDifferent) {
+        smallestDifferentGroups.push({
+          group1: [...subset],
+          group2: [...remaining],
+          difference: diff,
         });
       }
+
       return;
     }
 
-    // Include the current element in group1
-    group1.push(sortedArray[currentIndex]);
-    generateCombinations(currentIndex + 1, group1, group2);
-    group1.pop();
-
-    // Include the current element in group2
-    group2.push(sortedArray[currentIndex]);
-    generateCombinations(currentIndex + 1, group1, group2);
-    group2.pop();
+    for (let i = start; i < n; i++) {
+      if (i > start && arr[i] === arr[i - 1]) {
+        continue;
+      }
+      subset.push(arr[i]);
+      generateCombinations(arr, size, i + 1, subset);
+      subset.pop();
+    }
   };
 
-  generateCombinations(0, [], []);
-  return result;
-}
+  generateCombinations(array, subsetSize, 0, []);
 
-function sum(array) {
-  return array.reduce((total, num) => total + num, 0);
-}
+  return smallestDifferentGroups;
+};
 
-// Test cases
-// const array1 = [1, 1, 1, 1, 10];
-// console.log(findGroups(array1));
-
-// const array2 = [1, 2, 3, 4, 5];
-// console.log(findGroups(array2));
-
-// const array3 = [-2, -1, 1, 2, 3];
-// console.log(findGroups(array3));
-
-// const array4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// console.log(findGroups(array4));
+console.log(findSmallestDifferent2([1, 2, 3, 4, 5]));
