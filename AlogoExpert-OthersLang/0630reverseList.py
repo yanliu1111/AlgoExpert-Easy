@@ -52,3 +52,4 @@ def reversed_list(values):
     return initial_list.as_list()
 
 print(reversed_list([1, 2, 3, 4, 5]))
+print(reversed_list(["a", "b", "c", "d", "e"]))
