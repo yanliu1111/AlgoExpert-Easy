@@ -9,7 +9,7 @@
 #     else:
 #         return getNthFib(n-1) + getNthFib(n-2)
 
-# 2nd solution
+# 2nd solution, memoize hash table
 # O(n) time | O(n) space
 # def getNthFib(n, memoize = {1:0, 2:1}):
 #     if n in memoize:
