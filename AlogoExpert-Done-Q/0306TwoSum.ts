@@ -20,5 +20,21 @@ function twoNumberSum(array: number[], targetSum: number) {
 
 // array = [3, 5, -4, 8, 11, 1, -1, 6];
 // targetSum = 10;
+export function twoNumberSum2(array: number[], targetSum: number) {
+  const map = new Map<number, number>();
+
+  for (let i = 0; i < array.length; i++) {
+    const current = array[i];
+    const complement = targetSum - current;
+
+    if (map.has(complement)) {
+      return [current, complement];
+    }
+
+    map.set(current, i);
+  }
+
+  return [];
+}
 
 console.log(twoNumberSum([3, 5, -4, 8, 11, 1, -1, 6], 10));
