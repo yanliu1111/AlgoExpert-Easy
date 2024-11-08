@@ -1,3 +1,7 @@
+// iterative implement of the algorithm
+// Second iteration method
+// Time: Avg: O(log(N)) for BST, Space:O(1) algorithm iteratively
+// Time: one branch, worst: O(N), Space: O(1)
 class BST {
   value: number;
   left: BST | null;

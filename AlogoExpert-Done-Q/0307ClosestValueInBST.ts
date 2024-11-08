@@ -1,3 +1,12 @@
+// Two methods: recursively and iteration
+// This is iteration -1, I dont write recursive method, and here is recursively method cost, which need build a helper funtion in beginning, then call the helper method recursively.
+// instead the first one, we keep track of the current node we are exploring in a variable, so the second one has constant space we are using, we only store two variables current node and the closest variable.
+// Time: Avg: O(log(N)) for BST, Space:O(log(N)) algorithm iteratively
+// Time: one branch, worst: O(N), Space: O(N)
+// Second iteration method
+// Time: Avg: O(log(N)) for BST, Space:O(1) algorithm iteratively
+// Time: one branch, worst: O(N), Space: O(1)
+
 class BST {
   value: number;
   left: BST | null;
