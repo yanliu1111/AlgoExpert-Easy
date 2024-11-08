@@ -1,48 +1,19 @@
 "use strict";
-// remove export
-// function sortedSquaredArray(array: number[]) {
-//   let start = 0;
-//   let end = array.length - 1;
-//   let squareNums = [];
-//   let numbersToBeSquaredCount = array.length;
-//   while (numbersToBeSquaredCount > 0) {
-//     if (Math.abs(array[start]) > Math.abs(array[end])) {
-//       const square = Math.pow(array[start], 2);
-//       squareNums.unshift(square);
-//       start++;
-//       console.log("!!", squareNums);
-//     } else {
-//       const square = Math.pow(array[end], 2);
-//       squareNums.unshift(square);
-//       end--;
-//       console.log("??", squareNums);
-//     }
-//     numbersToBeSquaredCount--;
-//   }
-//   return squareNums;
-// }
-// console.log(sortedSquaredArray([-1, 0, 2]));
-function optimalFreelancing(jobs) {
-    let sum = 0;
-    const parsedJobs = jobs.map((j, i) => (Object.assign(Object.assign({}, j), { index: i })));
-    for (let day = 7; day >= 1; day--) {
-        const possibleJobs = parsedJobs.filter((j) => j.deadline >= day);
-        const maxPayment = possibleJobs.reduce((acc, curr) => (curr.payment > acc ? curr.payment : acc), 0);
-        const job = possibleJobs.find((j) => j.payment === maxPayment);
-        if (job) {
-            sum += job.payment;
-            parsedJobs.splice(job.index, 1);
+function transposeMatrix(matrix) {
+    const height = matrix.length; // Number of rows in the original matrix
+    const width = matrix[0].length; // Number of columns in the original matrix
+    // Initialize a transposed matrix with `width` rows, each being an empty array.
+    const transposed = new Array(width).fill(null).map((_) => new Array());
+    // Fill the transposed matrix by swapping rows and columns
+    for (let row = 0; row < height; row++) {
+        for (let col = 0; col < width; col++) {
+            transposed[col][row] = matrix[row][col]; // Assign the transposed value
         }
     }
-    return sum;
+    return transposed; // Return the transposed matrix
 }
-const jobs = [
-    { deadline: 1, payment: 10 },
-    { deadline: 2, payment: 15 },
-    { deadline: 3, payment: 20 },
-    { deadline: 2, payment: 5 },
-    { deadline: 4, payment: 30 },
+const matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
 ];
-console.log(optimalFreelancing(jobs));
-//write testing code just text
-console.log('hello world');
+console.log(transposeMatrix(matrix));

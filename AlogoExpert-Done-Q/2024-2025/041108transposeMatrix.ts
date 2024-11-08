@@ -1,4 +1,4 @@
-function transposeMatrix(matrix: number[][]) {
+export function transposeMatrix(matrix: number[][]) {
   const height = matrix.length; // Number of rows in the original matrix
   const width = matrix[0].length; // Number of columns in the original matrix
 
