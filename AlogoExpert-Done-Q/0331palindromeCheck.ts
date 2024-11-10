@@ -1,3 +1,4 @@
+// Time complexity: O(n); space complexity: O(1)
 function isPalindrome(string: string): boolean {
   let start = 0;
   let end = string.length - 1;
