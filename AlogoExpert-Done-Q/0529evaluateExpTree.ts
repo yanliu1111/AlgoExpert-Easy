@@ -1,5 +1,5 @@
 // This is an input class. Do not edit.
-// time complexity O(n), space complexity O(h)
+// recursive, time complexity O(n), space complexity O(h)
 
 export class BinaryTree {
   value: number;
