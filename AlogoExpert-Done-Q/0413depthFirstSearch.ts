@@ -25,3 +25,4 @@ export class Node {
   }
 }
 //time complexity: O(v + e) v is the number of vertices, e is the number of edges
+//space is O(v)
