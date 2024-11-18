@@ -1,4 +1,5 @@
 //minimum waiting time
+// sort --> o(nlog(n))
 //time complexity O(nlogn), space complexity O(1)
 export function minimumWaitingTime(queries: number[]) {
   const timingMap: Record<string, number> = {
@@ -15,3 +16,4 @@ export function minimumWaitingTime(queries: number[]) {
 
   return timingMap.queryTime;
 }
+// 1+2+2+3+6, 0 index,(1)*4 + (2)*(3) + 2 * (2) + 3 * (1)
