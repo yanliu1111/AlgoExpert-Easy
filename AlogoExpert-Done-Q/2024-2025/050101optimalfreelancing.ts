@@ -23,6 +23,6 @@ export function optimalFreelancing(
       sum += payment;
       break;
     }
-    return sum;
   }
+  return sum;
 }

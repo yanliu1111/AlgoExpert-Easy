@@ -1,3 +1,6 @@
+// Note:
+// You're using splice on parsedJobs based on job.index, but the splice function directly modifies the array. As the array changes, the index values no longer align with the original array, causing unexpected results.
+
 interface Job {
   deadline: number;
   payment: number;
@@ -37,3 +40,32 @@ const newJobs = [
 ];
 
 console.log(optimalFreelancing(newJobs));
+
+//edit one (20250101)
+interface Job {
+  deadline: number;
+  payment: number;
+}
+
+export function optimalFreelancing2(jobs: Job[]): number {
+  let sum = 0;
+
+  // Sort jobs by payment in descending order
+  const sortedJobs = jobs.sort((a, b) => b.payment - a.payment);
+
+  // Track the availability of days (1 to 7)
+  const daysTaken = new Array(8).fill(false); // Index 0 is unused for easier mapping
+
+  for (const job of sortedJobs) {
+    // Assign the job to the latest available day before its deadline
+    for (let day = Math.min(job.deadline, 7); day >= 1; day--) {
+      if (!daysTaken[day]) {
+        daysTaken[day] = true; // Mark the day as taken
+        sum += job.payment; // Add the job's payment to the total
+        break;
+      }
+    }
+  }
+
+  return sum;
+}
