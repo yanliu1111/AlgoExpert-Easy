@@ -32,6 +32,11 @@ function isAnagram1(s: string, t: string): boolean {
   }
   return true;
 }
+// q: do I need to create charCodeAt function?
+// a: no, it is built-in function
+// q: how to decide the charactor same, but the order is different?
+// a: use map to store the charactor and its frequency, then compare the frequency of the charactor in the second string
+// q: i am thinking, aay and aya are the same, but the order is different, how to solve this?
 
 // test in leetcode
 console.log(isAnagram('aya', 'aay'));

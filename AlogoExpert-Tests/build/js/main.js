@@ -1,19 +1,42 @@
 "use strict";
-function transposeMatrix(matrix) {
-    const height = matrix.length; // Number of rows in the original matrix
-    const width = matrix[0].length; // Number of columns in the original matrix
-    // Initialize a transposed matrix with `width` rows, each being an empty array.
-    const transposed = new Array(width).fill(null).map((_) => new Array());
-    // Fill the transposed matrix by swapping rows and columns
-    for (let row = 0; row < height; row++) {
-        for (let col = 0; col < width; col++) {
-            transposed[col][row] = matrix[row][col]; // Assign the transposed value
+//leetcode242 有效的字母异位词
+function isAnagram(s, t) {
+    if (s.length !== t.length)
+        return false;
+    const map = new Map();
+    for (let i = 0; i < s.length; i++) {
+        // map.set(key, value) map.get(key)  map.has(key)  map.delete(key)  map.size
+        // map.has(s[i]) ? map.get(s[i]) + 1 : 1 means if map has s[i], then get the value of s[i] and add 1, otherwise, set 1 for example, s = "anagram", s[0] = "a", map = new Map(), map.set("a", 1), then map = Map(1) {"a" => 1}, map.get("a") = 1, map.has("a") = true
+        map.set(s[i], map.has(s[i]) ? map.get(s[i]) + 1 : 1);
+    }
+    for (let i = 0; i < t.length; i++) {
+        if (map.has(t[i])) {
+            map.set(t[i], map.get(t[i]) - 1);
+            if (map.get(t[i]) === 0) {
+                map.delete(t[i]);
+            }
+        }
+        else {
+            return false;
         }
     }
-    return transposed; // Return the transposed matrix
+    return map.size === 0;
 }
-const matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-];
-console.log(transposeMatrix(matrix));
+//other method dont use map
+function isAnagram1(s, t) {
+    if (s.length !== t.length)
+        return false;
+    const map = new Array(26).fill(0);
+    for (let i = 0; i < s.length; i++) {
+        map[s.charCodeAt(i) - 97]++;
+    }
+    for (let i = 0; i < t.length; i++) {
+        map[t.charCodeAt(i) - 97]--;
+        if (map[t.charCodeAt(i) - 97] < 0)
+            return false;
+    }
+    return true;
+}
+// test in leetcode
+console.log(isAnagram('aya', 'aay'));
+console.log(isAnagram1('aya', 'aay'));
