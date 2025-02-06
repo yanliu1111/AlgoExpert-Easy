@@ -1,5 +1,6 @@
 //leetcode242 有效的字母异位词
 function isAnagram(s: string, t: string): boolean {
+  if (s === t) return false; // Treat identical strings as NOT anagrams
   if (s.length !== t.length) return false;
   const map = new Map();
   for (let i = 0; i < s.length; i++) {
